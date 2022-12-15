@@ -27,3 +27,10 @@ In a nutshell, SpinPlay works on nearly all Linux-based systems, BSD systems, Ma
 ### Requirements
 * Bash
 * FFmpeg
+
+### Installing dependencies
+Debian ``` apt install bash ffmpeg ```
+
+Arch Linux ``` pacman -S bash ffmpeg ```
+
+Fedora Linux ``` dnf install bash ffmpeg ```
