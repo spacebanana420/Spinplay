@@ -1,13 +1,15 @@
 # SpinPlay
-SpinPlay is a bash frontend that uses FFplay for more extensive and convenient media playback from the CLI.
+SpinPlay is a Bash frontend that uses FFplay for more extensive and convenient media playback from the CLI.
 
 SpinPlay adds more features to FFplay and makes it more usable on a daily-basis, which quality-of-life features such as setting the volume automatically when undefined and using autostop by default
 
 # Features
 * Full FFplay integration
+* FFmpeg's extremely wide format support
 * Convenience for regular use by falling back some arguments to predefined values
 * Extra features, such as playing all files in current directory
 * File seeking for when specified file does not exist
+* Fast and lightweight
 
 # Requirements and supported systems
 SpinPlay works on all systems capable of using FFmpeg and Bash, and systems whose core utilities have the "echo" utility.
