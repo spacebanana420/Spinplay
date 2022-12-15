@@ -14,6 +14,8 @@ SpinPlay works on all systems capable of using FFmpeg and Bash, and systems whos
 
 In a nutshell, SpinPlay works on nearly all Linux-based systems, BSD systems, MacOS and even Windows with some configurations
 
+Eventually, a second version of SpinPlay will be written in Powershell for Windows users to natively use the utility without having to install Bash.
+
 ### Officially supported systems:
 * Debian Linux and derivatives (Ubuntu, etc)
 * Arch Linux and derivatives (Manjaro, EndeavourOS, etc)
