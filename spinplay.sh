@@ -52,7 +52,7 @@ folders=()
 # }
 
 function help () {
-    echo "SpinPlay (version 0.1-git)"; echo "------------"
+    echo "SpinPlay (version 0.2-git)"; echo "------------"
     echo "Options:"; echo "ffplay options: -volume [volume], -x [width], -y [height], -loop [times] -fs [0/1]"
     echo "Script options: -random - plays randomly all media in current directory;  -dir - plays all media in current directory"
     echo "Keyboard and mouse controls while playing: q/esc - quit;  f/double click - toggle fullscreen;  m - mute;  p/space - pause;  9 and 0 - decrease and increase volume"
@@ -63,15 +63,21 @@ function help () {
 
 function spinmenu () {
     echo "SpinPlay (version 0.1-git)"; echo "------------"
-    echo "Saved Folders:"
-    num=1
-    for i in "${folders[@]}"
-    do
-        echo "$num: $i"; ((num+=1))
-    done
+    if [[ ${#folders[@]} != 0 ]]
+    then
+        echo "Saved Folders:"
+        num=1
+        for i in "${folders[@]}"
+        do
+            echo "$num: $i"; ((num+=1))
+        done
+        choosephrase="Choose a file or enter a folder by typing 'cd [number]'"
+    else
+        choosephrase="Choose a file"
+    fi
     echo "Files"
     ls
-    echo "Choose a file or enter a folder by typing 'cd [number]'"
+    echo $choosephrase
     read playfile
     if [[ $playfile == *"cd "* ]]
     then
