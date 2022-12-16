@@ -7,7 +7,7 @@ height=auto
 fullscreen=0
 showmode=1
 noborder=0
-folders=("/home/space/Música" "/home/space/Imagens")
+folders=()
 # function argcheck () {
 #     opt=(); count=0 next=""
 #     for i in "$@"
