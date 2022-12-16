@@ -4,15 +4,19 @@ SpinPlay is a Bash frontend that uses FFplay for more extensive and convenient m
 SpinPlay adds more features to FFplay and makes it more usable on a daily-basis, which quality-of-life features such as setting the volume automatically when undefined and using autostop by default
 
 # Features
-* Full FFplay integration
+* Main menu to choose files and navigate through directories
+* Full FFplay feature integration
 * FFmpeg's extremely wide format support
+* Config for defaults
+* Favorite folders
+* Mixing defined arguments with config defaults
 * Convenience for regular use by falling back some arguments to predefined values
-* Extra features, such as playing all files in current directory
-* File seeking for when specified file does not exist
+* Extra player features, such as playing all files in current directory
+* File seeking
 * Fast and lightweight
 
 # Requirements and supported systems
-SpinPlay works on all systems capable of using FFmpeg and Bash, and systems whose core utilities have the "echo" utility.
+SpinPlay works on all systems capable of using FFmpeg and Bash, and systems whose core utilities have the "echo", "ls" "cd" utilities.
 
 In a nutshell, SpinPlay works on nearly all Linux-based systems, BSD systems, MacOS and even Windows with some configurations
 
