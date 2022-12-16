@@ -5,7 +5,8 @@ volume=5
 width=auto
 height=auto
 fullscreen=0
-
+showmode=1
+noborder=0
 # function argcheck () {
 #     opt=(); count=0 next=""
 #     for i in "$@"
@@ -57,29 +58,32 @@ function help () {
     echo ""; echo "This script integrates all of FFplay's capabilities. Type 'ffplay -h' or 'man ffplay' for a full list of arguments"
 }
 
-function defaultplay () {
-    if [[ $playfile != "" ]]
+#todo: shuffle, default width for audio and video, menu loop, frequent files, frequent folders, disable autoexit for images
+
+function spinmenu () {
+    echo "SpinPlay (version 0.1-git)"; echo "------------"
+    ls
+    echo "Choose a file"
+    read playfile
+    if [[ -f $playfile ]]
     then
         ffplay $scriptopt $useropt "$playfile"
     else
-        ls
-        echo "Choose a file"
-        read playfile
-        if [[ -f $playfile ]]
-        then
-            ffplay $scriptopt $useropt "$playfile"
-        else
-            for i in *
-            do
-                if [[ $i == *"$playfile"* ]]
-                then
-                    playfile=$i
-                    ffplay $scriptopt $useropt "$playfile"
-                    break
-            done
-        fi
+        for i in *
+        do
+            if [[ $i == *"$playfile"* ]]
+            then
+                playfile=$i
+                ffplay $scriptopt $useropt "$playfile"
+                break
+        done
     fi
 }
+
+function defaultplay () {
+    ffplay $scriptopt $useropt "$playfile"
+}
+
 
 function playdir () {
     for i in *
@@ -98,17 +102,19 @@ function playdir () {
 #     done
 # }
 
-
 if [[ "$@" != *"-volume"* ]]; then scriptopt+="-volume $volume "; fi
 if [[ "$@" != *"-autoexit"* ]]; then scriptopt+="-autoexit "; fi
 if [[ "$@" != *"-fs"* && $fullscreen == 1 ]]; then scriptopt+="-fs "; fi
+if [[ "$@" != *"-noborder"* && $noborder == 1 ]]; then scriptopt+="-noborder "; fi
+if [[ "$@" != *"-x"* && $width != "auto" ]]; then scriptopt+="-x $width "; fi
+if [[ "$@" != *"-y"* && $height != "auto" ]]; then scriptopt+="-y $height "; fi
 
 for i in "$@"
 do
     if [[ -f "$i" ]]
     then
         playfile="$i"
-    elif [[ $i != *"random"* && $i != *"dir"* ]]
+    elif [[ $i != *"-random"* && $i != *"-dir"* ]]
     then
         useropt+="$i "
     fi
@@ -117,6 +123,9 @@ done
 if [[ "$@" == *"-dir"* ]]
 then
     playdir
-else
+elif [[ $playfile != "" ]]
+then
     defaultplay
+else
+    spinmenu
 fi
