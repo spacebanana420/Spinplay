@@ -7,6 +7,7 @@ height=auto
 fullscreen=0
 showmode=1
 noborder=0
+folders=("/home/space/Música" "/home/space/Imagens")
 # function argcheck () {
 #     opt=(); count=0 next=""
 #     for i in "$@"
@@ -62,9 +63,39 @@ function help () {
 
 function spinmenu () {
     echo "SpinPlay (version 0.1-git)"; echo "------------"
+    echo "Saved Folders:"
+    num=1
+    for i in "${folders[@]}"
+    do
+        echo "$num: $i"; ((num+=1))
+    done
+    echo "Files"
     ls
-    echo "Choose a file"
+    echo "Choose a file or enter a folder by typing 'cd [number]'"
     read playfile
+    if [[ $playfile == *"cd "* ]]
+    then
+        num=1
+        for i in "${folders[@]}"
+        do
+            if [[ $i == ${folders[$num]} ]]
+            then
+                cd $i
+                echo "Files"
+                ls
+                echo "Choose a file"
+                read playfile
+                readplay
+            else
+                ((num+=1))
+            fi
+        done
+    else
+        readplay
+    fi
+}
+
+function readplay () {
     if [[ -f $playfile ]]
     then
         ffplay $scriptopt $useropt "$playfile"
@@ -76,6 +107,7 @@ function spinmenu () {
                 playfile=$i
                 ffplay $scriptopt $useropt "$playfile"
                 break
+            fi
         done
     fi
 }
@@ -102,12 +134,6 @@ function playdir () {
 #     done
 # }
 
-if [[ "$@" != *"-volume"* ]]; then scriptopt+="-volume $volume "; fi
-if [[ "$@" != *"-autoexit"* ]]; then scriptopt+="-autoexit "; fi
-if [[ "$@" != *"-fs"* && $fullscreen == 1 ]]; then scriptopt+="-fs "; fi
-if [[ "$@" != *"-noborder"* && $noborder == 1 ]]; then scriptopt+="-noborder "; fi
-if [[ "$@" != *"-x"* && $width != "auto" ]]; then scriptopt+="-x $width "; fi
-if [[ "$@" != *"-y"* && $height != "auto" ]]; then scriptopt+="-y $height "; fi
 
 for i in "$@"
 do
@@ -119,6 +145,13 @@ do
         useropt+="$i "
     fi
 done
+
+if [[ "$@" != *"-volume"* ]]; then scriptopt+="-volume $volume "; fi
+if [[ "$@" != *"-autoexit"* && $playfile != "" && $playfile != *.png && $playfile != *.jpg && $playfile != *.tiff && $playfile != *.avif && $playfile != *.heic && $playfile != *.bmp && $playfile != *.webp && $playfile != *.jfif && $playfile != *.jpeg ]]; then scriptopt+="-autoexit "; fi
+if [[ "$@" != *"-fs"* && $fullscreen == 1 ]]; then scriptopt+="-fs "; fi
+if [[ "$@" != *"-noborder"* && $noborder == 1 ]]; then scriptopt+="-noborder "; fi
+if [[ "$@" != *"-x"* && $width != "auto" ]]; then scriptopt+="-x $width "; fi
+if [[ "$@" != *"-y"* && $height != "auto" ]]; then scriptopt+="-y $height "; fi
 
 if [[ "$@" == *"-dir"* ]]
 then
