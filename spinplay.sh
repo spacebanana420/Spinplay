@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Here you can set the defaults for when these arguments are unspecified
-volume=5
+volume=10
 width=auto
 height=auto
 fullscreen=0
@@ -52,17 +52,17 @@ folders=()
 # }
 
 function help () {
-    echo "SpinPlay (version 0.2-git)"; echo "------------"
+    echo "SpinPlay (version 0.3-git)"; echo "------------"
     echo "Options:"; echo "ffplay options: -volume [volume], -x [width], -y [height], -loop [times] -fs [0/1]"
     echo "Script options: -random - plays randomly all media in current directory;  -dir - plays all media in current directory"
     echo "Keyboard and mouse controls while playing: q/esc - quit;  f/double click - toggle fullscreen;  m - mute;  p/space - pause;  9 and 0 - decrease and increase volume"
     echo ""; echo "This script integrates all of FFplay's capabilities. Type 'ffplay -h' or 'man ffplay' for a full list of arguments"
 }
 
-#todo: shuffle, default width for audio and video, menu loop, frequent files, frequent folders, disable autoexit for images
+#todo: shuffle, default width for audio and video, frequent files, frequent folders, disable autoexit for images
 
 function spinmenu () {
-    echo "SpinPlay (version 0.1-git)"; echo "------------"
+    echo "SpinPlay (version 0.3-git)"; echo "------------"
     if [[ ${#folders[@]} != 0 ]]
     then
         echo "Saved Folders:"
@@ -71,34 +71,32 @@ function spinmenu () {
         do
             echo "$num: $i"; ((num+=1))
         done
-        choosephrase="Choose a file or enter a folder by typing 'cd [number]'"
-    else
-        choosephrase="Choose a file"
+        echo ""
     fi
-    echo "Files"
-    ls
-    echo $choosephrase
-    read playfile
-    if [[ $playfile == *"cd "* ]]
-    then
-        num=1
-        for i in "${folders[@]}"
-        do
-            if [[ $i == ${folders[$num]} ]]
-            then
-                cd $i
-                echo "Files"
-                ls
-                echo "Choose a file"
-                read playfile
-                readplay
-            else
-                ((num+=1))
-            fi
-        done
-    else
-        readplay
-    fi
+
+    while true
+    do
+        echo "Files:"
+        ls
+        echo ""; echo "Choose a file or a folder or type '..' to jump to parent folder or type 'quit' or 'q' to leave"
+        read playfile
+        if [[ -d $playfile ]]; then cd "$playfile";
+        elif [[ $playfile == ".." ]]; then cd ..;
+        elif [[ -f $playfile ]]; then readplay;
+        elif (("$playfile" != 0)) #errors-
+        then
+            for i in "${folders[@]}"
+            do
+                if [[ $i == ${folders[$playfile-1]} ]]
+                then
+                    cd $i
+                    break
+                fi
+            done
+        elif [[ $playfile == "quit" || $playfile == "q" ]]; then break;
+        fi
+        echo ""
+    done
 }
 
 function readplay () {
@@ -158,6 +156,7 @@ if [[ "$@" != *"-fs"* && $fullscreen == 1 ]]; then scriptopt+="-fs "; fi
 if [[ "$@" != *"-noborder"* && $noborder == 1 ]]; then scriptopt+="-noborder "; fi
 if [[ "$@" != *"-x"* && $width != "auto" ]]; then scriptopt+="-x $width "; fi
 if [[ "$@" != *"-y"* && $height != "auto" ]]; then scriptopt+="-y $height "; fi
+if [[ "$@" != *"-showmode"* ]] && (($showmode >= 0)) && (($showmode <=2)); then scriptopt+="-showmode $showmode "; fi
 
 if [[ "$@" == *"-dir"* ]]
 then
