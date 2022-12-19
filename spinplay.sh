@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Here you can set the defaults for when these arguments are unspecified
-volume=10
+volume=7
 width=auto
 height=auto
 fullscreen=0
@@ -59,7 +59,7 @@ function help () {
     echo ""; echo "This script integrates all of FFplay's capabilities. Type 'ffplay -h' or 'man ffplay' for a full list of arguments"
 }
 
-#todo: shuffle, default width for audio and video, frequent files, frequent folders, disable autoexit for images
+#todo: shuffle, default width for audio and video, frequent files, frequent folders, disable autoexit for images, go to dir, auto loop on short media
 
 function spinmenu () {
     num=1
