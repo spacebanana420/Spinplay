@@ -27,7 +27,6 @@ Eventually, a second version of SpinPlay will be written in Powershell for Windo
 * Arch Linux and derivatives (Manjaro, EndeavourOS, etc)
 * Fedora Linux
 * OpenSUSE
-* MacOS
 * Void Linux
 * FreeBSD
 
