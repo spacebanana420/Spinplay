@@ -27,7 +27,6 @@ Eventually, a second version of SpinPlay will be written in Powershell for Windo
 * Arch Linux and derivatives (Manjaro, EndeavourOS, etc)
 * Fedora Linux
 * OpenSUSE
-* Alpine Linux
 * MacOS
 * Void Linux
 * FreeBSD
@@ -41,4 +40,6 @@ Debian ``` apt install bash ffmpeg ```
 
 Arch Linux ``` pacman -S bash ffmpeg ```
 
-Fedora Linux ``` dnf install bash ffmpeg ```
+Fedora Linux ``` dnf install bash ffmpeg ``` or ``` dnf install bash ffmpeg-free ```
+
+Note: For Fedora Linux (and probably other RHEL-based systems), ffmpeg in its full state is only available on community repos, like RPM fusion. On Fedora by default you need to enable the RPM Fusion repository in order to have all encoders and decoders of ffmpeg, including encoding and probably decoding of H.264. The package that is shipped by default on Fedora is ffmpeg-free, a cut-down version of ffmpeg that does not contain encoders, decoders and codecs that might have problems with the US patent law. You do not want ffmpeg-free if you want to encode/playback H.264 videos.
