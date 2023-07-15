@@ -67,6 +67,9 @@ end
 def open_path(path)
     if is_video(path) == true
         settings = "-volume 10 -loglevel 16  -showmode 0 -autoexit"
+        if path.include?(".gif") == true
+            settings += " -loop 0"
+        end
     else
         settings = "-x 400 -y 400 -volume 10 -loglevel 16 -autoexit"
     end
