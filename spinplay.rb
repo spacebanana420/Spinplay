@@ -52,7 +52,7 @@ def filebrowser()
         when 1
             Dir::chdir("..")
         else
-            for path in paths
+            paths.each do |path|
                 if answernum == paths_num[count]
                     open_path(path)
                     break
@@ -85,7 +85,7 @@ def print_dirs()
     dirs = Array.new(); files = Array.new()
     allpaths = Array.new(); allpaths_num = Array.new()
 
-    for path in paths
+    paths.each do |path|
         if File::file?(path) == true
             if check_if_supported(path) == true
                 files.push(path)
@@ -96,7 +96,7 @@ def print_dirs()
     end
     count=2
     pathsprinted=0
-    for dir in dirs
+    dirs.each do |dir|
         if pathsprinted == 3 then pathsprinted = 0; finalstring += "\n" end
         finalstring += "#{count}: #{dir}     "
 
@@ -105,7 +105,7 @@ def print_dirs()
     end
     pathsprintedi=0
     finalstring += "\n---Files---\n"
-    for file in files
+    files.each do |file|
         if pathsprinted == 3 then pathsprinted = 0; finalstring += "\n" end
         finalstring += "#{count}: #{file}     "
 
