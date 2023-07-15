@@ -7,11 +7,17 @@ Spinplay has a built-in TUI file explorer for navigating your directories and fi
 
 Spinplay was until just now a Bash front-end. I am now rewriting it in Ruby with more capabilities, speed and cross-platform in mind.
 
-# Requirements and supported systems
-## New Spinplay
+# Download
+Spinplay should work in multiple operative systems, but it's currently only officially tested for Linux systems and Windows
+
+Once the new Spinplay gets released, download it from the Releases page. You also need to install Ruby and FFmpeg
+
+## Requirements
+
+### New Spinplay
 * Ruby
 * FFplay (in your PATH)
 
-## Old Spinplay
+### Old Spinplay
 * Bash
 * FFplay (in your PATH)
