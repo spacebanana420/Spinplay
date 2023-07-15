@@ -43,6 +43,7 @@ end
 
 def filebrowser()
     while true
+        clear_terminal()
         paths, paths_num = print_dirs()
         answer = gets.chomp; answernum = answer.to_i
         count=0
@@ -60,15 +61,14 @@ def filebrowser()
                 count+=1
             end
         end
-        clear_terminal()
     end
 end
 
 def open_path(path)
     if is_video(path) == true
-        settings = "-volume 10 -loglevel 16 -showmode 0 -autoexit"
+        settings = "-volume 10 -loglevel 16  -showmode 0 -autoexit"
     else
-        settings = "-x 400 -y 400 -volume 10 -loglevel 16 -showmode 1 -autoexit"
+        settings = "-x 400 -y 400 -volume 10 -loglevel 16 -autoexit"
     end
 
     if File::file?(path) == true
