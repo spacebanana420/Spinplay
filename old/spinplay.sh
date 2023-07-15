@@ -8,48 +8,6 @@ fullscreen=0
 showmode=1
 noborder=0
 folders=()
-# function argcheck () {
-#     opt=(); count=0 next=""
-#     for i in "$@"
-#     do
-#         case $i in
-#             -v)
-#                 next="-v"
-#             ;;
-#             -x)
-#                 next="-y"
-#             ;;
-#             -y)
-#                 next="-y"
-#             ;;
-#             -l)
-#                 next="-l"
-#             ;;
-#             *)
-#                 if [[ $i != "" && $next != "" ]]
-#                 then
-#                     opt[$next]=$i; next=""
-#                 elif [[ $i != "" ]]
-#                     file=$i
-#                     return
-#                 fi
-#             ;;
-#         esac
-#     done
-#
-#     for i in "-v" "-x" "-y" "-l"
-#     do
-#         if [[ $opt[$i] != "" ]]
-#         then
-#             if [[ $i != "-l" ]]
-#             then
-#                 options+="$i ${opt[$i]} "
-#             else
-#                 options+="$i "
-#             fi
-#         fi
-#     done
-# }
 
 function help () {
     echo "SpinPlay (version 0.5-git)"; echo "------------"
@@ -145,13 +103,6 @@ function playdir () {
         fi
     done
 }
-
-# function shuffleplay () {
-#     for i in *
-#     do
-#
-#     done
-# }
 
 
 for i in "$@"
