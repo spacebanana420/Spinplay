@@ -46,7 +46,7 @@ end
 
 def open_path(path)
     if path.include?(".gif") == true
-        $loop = " -loop 0"
+        $loop = " -loop 0" #fix bug!!!!!
     end
     if is_video(path) == false
         $width = "-x 400"; $height = "-y 400"
@@ -54,7 +54,10 @@ def open_path(path)
 
     if File::file?(path) == true
         #puts "Now playing #{path}\nSpace: pause\n9 and 0: decrease/increase volume\nQ: quit"
-        Thread.new {system("ffplay -loglevel 16 -autoexit #{$volume} #{$showmode} #{$width} #{$height} \"#{path}\"")}
+        Thread.new {
+            system("ffplay -loglevel 16 -autoexit #{$volume} #{$showmode} #{$width} #{$height} \"#{path}\"")
+            puts "Finished playing #{path}"
+        }
     else
         Dir::chdir(path)
     end
