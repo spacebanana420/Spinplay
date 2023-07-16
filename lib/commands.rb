@@ -16,7 +16,7 @@ def printhelp()
     puts "Spinplay v1.1 help menu\n
 Spinplay is a front-end for FFplay which adds a file browser and automates a lot of the boring stuff you need to type to use FFplay as a proper media player
 
-Common controls during playback:
+Common controls during video/audio playback:
     - Space: pause
     - Esc or Q: end playback
     - 9: decrease volume
@@ -28,6 +28,36 @@ Common controls during playback:
 List of commands:
     - help
     - volume
+
+File detection is done through their extension and case-sensitive, so media without or with a different extension than the one for their format will not be detected
+
+File Extensions:
+    Video
+        mp4
+        mov
+        avi
+        m4v
+        mkv
+        webm
+    Image
+        png
+        jpg
+        bmp
+        tiff
+        tif
+        TIF
+        heif
+        heic
+        avif
+        webp
+        gif
+    Audio
+        mp3
+        wav
+        ogg
+        opus
+        flac
+        m4a
 
 Press any key to exit"
     gets; clear_terminal

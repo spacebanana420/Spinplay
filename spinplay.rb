@@ -45,17 +45,17 @@ def filebrowser()
 end
 
 def open_path(path)
-    if path.include?(".gif") == true
+    if is_image(path) == true
+        $autoexit = ""
+    elsif path.include?(".gif") == true
         $loop = " -loop 0" #fix bug!!!!!
-    end
-    if is_video(path) == false
+    elsif is_audio(path) == true
         $width = "-x 400"; $height = "-y 400"
     end
 
     if File::file?(path) == true
-        #puts "Now playing #{path}\nSpace: pause\n9 and 0: decrease/increase volume\nQ: quit"
         Thread.new {
-            system("ffplay -loglevel 16 -autoexit #{$volume} #{$showmode} #{$width} #{$height} \"#{path}\"")
+            system("ffplay -loglevel 16 #{$autoexit} #{$volume} #{$showmode} #{$width} #{$height} \"#{path}\"")
             puts "Finished playing #{path}"
         }
     else
