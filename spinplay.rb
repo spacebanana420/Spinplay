@@ -1,5 +1,5 @@
-$video_formats = [".mp4", ".mov", ".mkv", ".webm", ".avi", ".m4v", ".gif"]
-$audio_formats = [".flac", ".mp3", ".m4a", ".wav", ".ogg", ".opus"]
+require "./lib/commands.rb"
+require "./lib/ffsettings.rb"
 
 def get_platform()
     starting_path = Dir::pwd()
@@ -8,29 +8,6 @@ def get_platform()
     else
         $platform = 0
     end
-end
-
-def is_video(filename)
-    $video_formats.each do |fmt|
-        if filename.include?(fmt) == true
-            return true
-        end
-    end
-    return false
-end
-
-def check_if_supported(filename)
-    $video_formats.each do |fmt|
-        if filename.include?(fmt) == true
-            return true
-        end
-    end
-    $audio_formats.each do |fmt|
-        if filename.include?(fmt) == true
-            return true
-        end
-    end
-    return false
 end
 
 def clear_terminal()
@@ -45,38 +22,39 @@ def filebrowser()
     while true
         clear_terminal()
         paths, paths_num = print_dirs()
-        answer = gets.chomp; answernum = answer.to_i
-        count=0
-        case answernum
-        when 0
-            return
-        when 1
-            Dir::chdir("..")
-        else
-            paths.each do |path|
-                if answernum == paths_num[count]
-                    open_path(path)
-                    break
+        answer = gets.chomp
+        if read_command(answer) == false
+            answernum = answer.to_i
+            case answernum
+            when 0
+                return
+            when 1
+                Dir::chdir("..")
+            else
+                count=0
+                paths.each do |path|
+                    if answernum == paths_num[count]
+                        open_path(path)
+                        break
+                    end
+                    count+=1
                 end
-                count+=1
             end
         end
     end
 end
 
 def open_path(path)
-    if is_video(path) == true
-        settings = "-volume 10 -loglevel 16  -showmode 0 -autoexit"
-        if path.include?(".gif") == true
-            settings += " -loop 0"
-        end
-    else
-        settings = "-x 400 -y 400 -volume 10 -loglevel 16 -autoexit"
+    if path.include?(".gif") == true
+        $loop = " -loop 0"
+    end
+    if is_video(path) == false
+        $width = "-x 400"; $height = "-y 400"
     end
 
     if File::file?(path) == true
         #puts "Now playing #{path}\nSpace: pause\n9 and 0: decrease/increase volume\nQ: quit"
-        Thread.new {system("ffplay #{settings} \"#{path}\"")}
+        Thread.new {system("ffplay -loglevel 16 -autoexit #{$volume} #{$showmode} #{$width} #{$height} \"#{path}\"")}
     else
         Dir::chdir(path)
     end
