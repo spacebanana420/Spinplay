@@ -10,14 +10,14 @@ Spinplay was until just now a Bash front-end. I am now rewriting it in Ruby with
 # Download
 Spinplay should work in multiple operative systems, but it's currently only officially tested for Linux systems and Windows
 
-Once the new Spinplay gets released, download it from the Releases page. You also need to install Ruby and FFmpeg
+Download Spinplay [here](https://github.com/spacebanana420/Spinplay/releases/). You also need to install Ruby and FFmpeg
 
 ## Requirements
 
 ### New Spinplay
-* Ruby
-* FFmpeg (in your PATH)
+* [Ruby](https://www.ruby-lang.org/en/)
+* [FFmpeg](https://ffmpeg.org/) (in your PATH)
 
 ### Old Spinplay
 * Bash
-* FFmpeg (in your PATH)
+* [FFmpeg](https://ffmpeg.org/) (in your PATH)
