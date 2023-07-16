@@ -16,8 +16,8 @@ Once the new Spinplay gets released, download it from the Releases page. You als
 
 ### New Spinplay
 * Ruby
-* FFplay (in your PATH)
+* FFmpeg (in your PATH)
 
 ### Old Spinplay
 * Bash
-* FFplay (in your PATH)
+* FFmpeg (in your PATH)
