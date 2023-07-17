@@ -4,8 +4,10 @@ def read_command(answer)
         printhelp()
         return true
     when "volume"
-        choose_volume()
+        choose_volume(false)
         return true
+    when "mute"
+        $mute = !$mute
     else
         return false
     end
@@ -17,8 +19,10 @@ def printhelp()
 Spinplay is a front-end for FFplay which adds a file browser and automates a lot of the boring stuff you need to type to use FFplay as a proper media player
 
 Common controls during video/audio playback:
-    - Space: pause
+    - Space or P: pause
     - Esc or Q: end playback
+    - S: advance 1 frame
+    - F or double mouse click: toggle fullscreen
     - 9: decrease volume
     - 0: increase volume
     - Arrow keys: move in timeline

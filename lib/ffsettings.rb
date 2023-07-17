@@ -3,6 +3,7 @@ $audio_formats = [".flac", ".mp3", ".m4a", ".wav", ".ogg", ".opus"]
 $image_formats = [".png", ".jpg", ".bmp", ".tiff", ".tif", ".TIF", ".avif", ".heic", ".heif", ".webp"]
 
 $volume = "-volume 10"
+$mute = false
 #$showmode = ""
 
 def playmedia(path)
@@ -15,6 +16,9 @@ def playmedia(path)
     end
     if is_audio(path) == true
         args += " -x 400 -y 400"
+    end
+    if $mute == true
+        args += " -an"
     end
     Thread.new {
         system("ffplay -loglevel 16 #{args} \"#{path}\"")
