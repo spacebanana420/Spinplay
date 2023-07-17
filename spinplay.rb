@@ -45,19 +45,8 @@ def filebrowser()
 end
 
 def open_path(path)
-    if is_image(path) == true
-        $autoexit = ""
-    elsif path.include?(".gif") == true
-        $loop = " -loop 0" #fix bug!!!!!
-    elsif is_audio(path) == true
-        $width = "-x 400"; $height = "-y 400"
-    end
-
     if File::file?(path) == true
-        Thread.new {
-            system("ffplay -loglevel 16 #{$autoexit} #{$volume} #{$showmode} #{$width} #{$height} \"#{path}\"")
-            puts "Finished playing #{path}"
-        }
+        playmedia(path)
     else
         Dir::chdir(path)
     end

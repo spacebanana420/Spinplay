@@ -29,7 +29,7 @@ List of commands:
     - help
     - volume
 
-File detection is done through their extension and case-sensitive, so media without or with a different extension than the one for their format will not be detected
+File detection is done through their extensions and it's case-sensitive, so the media files without or with a different extension than the one for their format will not be detected
 
 File Extensions:
     Video

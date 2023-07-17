@@ -3,11 +3,27 @@ $audio_formats = [".flac", ".mp3", ".m4a", ".wav", ".ogg", ".opus"]
 $image_formats = [".png", ".jpg", ".bmp", ".tiff", ".tif", ".TIF", ".avif", ".heic", ".heif", ".webp"]
 
 $volume = "-volume 10"
-$showmode = ""
-$width = ""
-$height = ""
-$loop = ""
-$autoexit = "-autoexit"
+#$showmode = ""
+
+def playmedia(path)
+    args = $volume
+    if path.include?(".gif") == true
+        args += " -loop 0"
+    end
+    if is_image(path) == false
+        args += " -autoexit"
+    end
+    if is_audio(path) == true
+        args += " -x 400 -y 400"
+    end
+    Thread.new {
+        system("ffplay -loglevel 16 #{args} \"#{path}\"")
+        #testing shit
+        #system("ffplay", "-loglevel", "16", "#{$autoexit} #{$volume} #{$showmode} #{$width} #{$height}", path)
+        #system("ffplay", "-loglevel", "16", "-autoexit", "-volume", "10", path)
+        puts "Finished playing #{path}"
+    }
+end
 
 def is_video(filename)
     $video_formats.each do |fmt|
