@@ -8,6 +8,19 @@ def read_command(answer)
         return true
     when "mute"
         $mute = !$mute
+    when "config"
+        volume = $volume.sub("-volume ", "")
+        if $safecheck == true
+            safe = "Safecheck: true"
+        else
+            safe = "Safecheck: false"
+        end
+        if $fullscreen == true
+            fs = "Fullscreen: true"
+        else
+            fs = "Fullscreen: false"
+        end
+        puts "#{volume}\n#{safe}\n#{fs}"
     else
         return false
     end
@@ -32,6 +45,8 @@ Common controls during video/audio playback:
 List of commands:
     - help
     - volume
+    - mute
+    - config
 
 File detection is done through their extensions and it's case-sensitive, so the media files without or with a different extension than the one for their format will not be detected
 

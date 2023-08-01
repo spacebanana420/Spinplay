@@ -1,14 +1,16 @@
 require "./lib/commands.rb"
 require "./lib/ffsettings.rb"
+require "./lib/readconfig.rb"
 
-def get_platform()
-    starting_path = Dir::pwd()
-    if "ABCDEFGHIJKLMNOPQRSTUVWXYZ".include?(starting_path.chars[0]) == true && starting_path.chars[1] == ":"
-        $platform = 1
-    else
-        $platform = 0
-    end
+$startingdir = Dir.pwd()
+if "ABCDEFGHIJKLMNOPQRSTUVWXYZ".include?($startingdir.chars[0]) == true && $startingdir.chars[1] == ":"
+    $platform = 1
+else
+    $platform = 0
 end
+
+$volume = "-volume 12"; $safecheck = true; $fullscreen = false
+
 
 def clear_terminal()
     if $platform == 0
@@ -91,5 +93,5 @@ def print_dirs()
     return allpaths, allpaths_num
 end
 
-get_platform()
+readconfig()
 filebrowser()
