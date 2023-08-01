@@ -1,6 +1,6 @@
 $video_formats = [".mp4", ".mov", ".mkv", ".webm", ".avi", ".m4v", ".gif"]
 $audio_formats = [".flac", ".mp3", ".m4a", ".wav", ".ogg", ".opus"]
-$image_formats = [".png", ".jpg", ".bmp", ".tiff", ".tif", ".TIF", ".avif", ".heic", ".heif", ".webp"]
+$image_formats = [".png", ".jpg", ".bmp", ".tiff", ".tif", ".TIF", ".avif", ".heic", ".heif", ".webp", ".ppm"]
 
 $volume = "-volume 10"
 $mute = false
