@@ -9,21 +9,27 @@ def read_command(answer)
     when "mute"
         $mute = !$mute
     when "config"
-        volume = $volume.sub("-volume ", "")
-        if $safecheck == true
-            safe = "Safecheck: true"
-        else
-            safe = "Safecheck: false"
-        end
-        if $fullscreen == true
-            fs = "Fullscreen: true"
-        else
-            fs = "Fullscreen: false"
-        end
-        puts "#{volume}\n#{safe}\n#{fs}"
+        printconfig()
     else
         return false
     end
+end
+
+
+def printconfig()
+    volume = "Volume: #{$volume.sub("-volume ", "")}"
+    if $safecheck == true
+        safe = "Safecheck: true"
+    else
+        safe = "Safecheck: false"
+    end
+    if $fullscreen == true
+        fs = "Fullscreen: true"
+    else
+        fs = "Fullscreen: false"
+    end
+    puts "#{volume}\n#{safe}\n#{fs}\n\nPress any key to exit"
+    gets
 end
 
 def printhelp()

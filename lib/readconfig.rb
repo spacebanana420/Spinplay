@@ -34,17 +34,18 @@ def readconfig()
 end
 
 def getvaluefromoption(line)
-    line = line.sub("\n")
+    line = line.sub("\n", "")
     chars = line.chars
     startreading = false
     value = ""
 
     chars.each do |char|
-        if char == "="
-            startreading = true
-        end
         if startreading == true
             value += char
+        end
+
+        if char == "="
+            startreading = true
         end
     end
     return value
