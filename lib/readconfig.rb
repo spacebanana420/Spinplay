@@ -1,5 +1,5 @@
 def generateconfig()
-    configuration="volume=12\nsafecheck=true\nfullscreen=false"
+    configuration="volume=12\nsafecheck=true\nfullscreen=false\npathsperline=3\nlinesperblock=10"
     File.write("#{$startingdir}/config.txt", configuration)
 end
 
@@ -26,6 +26,16 @@ def readconfig()
                     $fullscreen = true
                 else
                     $fullscreen = false
+                end
+            when "pathsperline"
+                paths_line = getvaluefromoption(line)
+                if checkifnumber(paths_line) == true
+                    $pathsperline = paths_line
+                end
+            when "linesperblock"
+                blocksize = getvaluefromoption(line)
+                if checkifnumber(blocksize) == true
+                    $linesperblock = blocksize
                 end
             end
         end
@@ -55,7 +65,7 @@ def whichoption(line)
     if line.chars[0] == "#"
         return false
     end
-    options = ["volume", "safecheck", "fullscreen"]
+    options = ["volume", "safecheck", "fullscreen", "pathsperline", "linesperblock"]
     options.each do |option|
         if line.include?(option) == true
             return option

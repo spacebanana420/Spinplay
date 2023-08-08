@@ -8,27 +8,36 @@ def read_command(answer)
         return true
     when "mute"
         $mute = !$mute
+        return true
     when "config"
         printconfig()
+        return true
     else
-        return false
+        if answer.include?("search ") == true
+            find_path(answer.sub("search ", ""))
+            return true
+        end
     end
+    return false
 end
 
 
 def printconfig()
-    volume = "Volume: #{$volume.sub("-volume ", "")}"
+    config_list = "Volume: #{$volume.sub("-volume ", "")}\n"
     if $safecheck == true
-        safe = "Safecheck: true"
+        config_list += "Safecheck: true\n"
     else
-        safe = "Safecheck: false"
+        config_list += "Safecheck: false\n"
     end
     if $fullscreen == true
-        fs = "Fullscreen: true"
+        config_list += "Fullscreen: true\n"
     else
-        fs = "Fullscreen: false"
+        config_list += "Fullscreen: false\n"
     end
-    puts "#{volume}\n#{safe}\n#{fs}\n\nPress any key to exit"
+    config_list += "Paths per line: #{$pathsperline}"
+    config_list += "Lines per block: #{$linesperblock}"
+
+    puts "#{config_list}\n\nPress any key to exit"
     gets
 end
 
@@ -50,6 +59,7 @@ Common controls during video/audio playback:
 
 List of commands:
     - help
+    - search [name_to_find]
     - volume
     - mute
     - config

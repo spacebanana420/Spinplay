@@ -9,7 +9,7 @@ else
     $platform = 0
 end
 
-$volume = "-volume 12"; $safecheck = true; $fullscreen = false
+$volume = "-volume 12"; $safecheck = true; $fullscreen = false; $pathsperline = 3; $linesperblock = 10;
 
 
 def clear_terminal()
@@ -25,7 +25,7 @@ def filebrowser()
         clear_terminal()
         paths, paths_num = print_dirs()
         answer = gets.chomp
-        if read_command(answer) == false
+        if read_command(answer) == false && checkifnumber(answer) == true
             answernum = answer.to_i
             case answernum
             when 0
@@ -72,7 +72,7 @@ def print_dirs()
     count=2
     pathsprinted=0
     dirs.each do |dir|
-        if pathsprinted == 3 then pathsprinted = 0; finalstring += "\n" end
+        if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
         finalstring += "#{count}: #{dir}     "
 
         allpaths.push(dir); allpaths_num.push(count)
@@ -81,16 +81,65 @@ def print_dirs()
     pathsprintedi=0
     finalstring += "\n---Files---\n"
     files.each do |file|
-        if pathsprinted == 3 then pathsprinted = 0; finalstring += "\n" end
+        if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
         finalstring += "#{count}: #{file}     "
 
         allpaths.push(file); allpaths_num.push(count)
         count+=1; pathsprinted+=1
     end
-    finalstring += "\n"
 
+    finalstring += "\n"
     puts finalstring
     return allpaths, allpaths_num
+end
+
+def find_path(searchedname)
+    finalstring = "Found the following paths that contain #{searchedname}:\n\n---Directories---\n"
+    paths = Dir::children(".")
+    dirs = Array.new(); files = Array.new()
+
+    paths.each do |path|
+        if File::file?(path) == true
+            if check_if_supported(path) == true
+                files.push(path)
+            end
+        else
+            dirs.push(path)
+        end
+    end
+    count=2
+    pathsprinted=0
+    dirs.each do |dir|
+        if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
+        if dir.include?(searchedname) == true
+            finalstring += "#{count}: #{dir}     "
+            pathsprinted+=1
+        end
+        count+=1
+    end
+    pathsprintedi=0
+    finalstring += "\n---Files---\n"
+    files.each do |file|
+        if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
+        if file.include?(searchedname) == true
+            finalstring += "#{count}: #{file}     "
+            pathsprinted+=1
+        end
+        count+=1
+    end
+
+    finalstring += "\n\nPress any key to continue"
+    puts finalstring
+    gets
+end
+
+def checkifnumber(text)
+    text.chars().each do |char|
+        if "0123456789".include?(char) == false
+            return false
+        end
+    end
+    return true
 end
 
 readconfig()
