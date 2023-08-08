@@ -94,6 +94,7 @@ def print_dirs()
 end
 
 def find_path(searchedname)
+    clear_terminal()
     finalstring = "Found the following paths that contain #{searchedname}:\n\n---Directories---\n"
     paths = Dir::children(".")
     dirs = Array.new(); files = Array.new()
