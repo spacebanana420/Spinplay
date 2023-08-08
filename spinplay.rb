@@ -9,7 +9,7 @@ else
     $platform = 0
 end
 
-$volume = "-volume 12"; $safecheck = true; $fullscreen = false; $pathsperline = 3; $linesperblock = 10;
+$volume = "-volume 12"; $safecheck = true; $fullscreen = false; $pathsperline = 3; $linesperblock = 10; $linespacing = "     "
 
 
 def clear_terminal()
@@ -55,7 +55,7 @@ def open_path(path)
 end
 
 def print_dirs()
-    finalstring = "0: Exit     1: Go back\n---Directories---\n"
+    finalstring = "0: Exit#{$linespacing}1: Go back\n\n---Directories---\n"
     paths = Dir::children(".")
     dirs = Array.new(); files = Array.new()
     allpaths = Array.new(); allpaths_num = Array.new()
@@ -73,7 +73,7 @@ def print_dirs()
     pathsprinted=0
     dirs.each do |dir|
         if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
-        finalstring += "#{count}: #{dir}     "
+        finalstring += "#{count}: #{dir}#{$linespacing}"
 
         allpaths.push(dir); allpaths_num.push(count)
         count+=1; pathsprinted+=1
@@ -82,13 +82,13 @@ def print_dirs()
     finalstring += "\n---Files---\n"
     files.each do |file|
         if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
-        finalstring += "#{count}: #{file}     "
+        finalstring += "#{count}: #{file}#{$linespacing}"
 
         allpaths.push(file); allpaths_num.push(count)
         count+=1; pathsprinted+=1
     end
 
-    finalstring += "\n"
+    finalstring += "\n\n"
     puts finalstring
     return allpaths, allpaths_num
 end
@@ -112,7 +112,7 @@ def find_path(searchedname)
     dirs.each do |dir|
         if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
         if dir.include?(searchedname) == true
-            finalstring += "#{count}: #{dir}     "
+            finalstring += "#{count}: #{dir}#{$linespacing}"
             pathsprinted+=1
         end
         count+=1
@@ -122,7 +122,7 @@ def find_path(searchedname)
     files.each do |file|
         if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
         if file.include?(searchedname) == true
-            finalstring += "#{count}: #{file}     "
+            finalstring += "#{count}: #{file}#{$linespacing}"
             pathsprinted+=1
         end
         count+=1
