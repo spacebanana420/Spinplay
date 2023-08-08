@@ -23,7 +23,8 @@ end
 
 
 def printconfig()
-    config_list = "Volume: #{$volume.sub("-volume ", "")}\n"
+    clear_terminal()
+    config_list = "Spinplay config\n\nVolume: #{$volume.sub("-volume ", "")}\n"
     if $safecheck == true
         config_list += "Safecheck: true\n"
     else
@@ -36,6 +37,12 @@ def printconfig()
     end
     config_list += "Paths per line: #{$pathsperline}\n"
     config_list += "Lines per block: #{$linesperblock}\n"
+
+    linespacing_number = 0
+    $linespacing.chars().each do
+        linespacing_number += 1
+    end
+    config_list += "Line spacing: #{linespacing_number}\n"
 
     puts "#{config_list}\nPress any key to exit"
     gets
