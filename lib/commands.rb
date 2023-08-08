@@ -34,10 +34,10 @@ def printconfig()
     else
         config_list += "Fullscreen: false\n"
     end
-    config_list += "Paths per line: #{$pathsperline}"
-    config_list += "Lines per block: #{$linesperblock}"
+    config_list += "Paths per line: #{$pathsperline}\n"
+    config_list += "Lines per block: #{$linesperblock}\n"
 
-    puts "#{config_list}\n\nPress any key to exit"
+    puts "#{config_list}\nPress any key to exit"
     gets
 end
 
