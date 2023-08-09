@@ -51,9 +51,9 @@ end
 def printhelp()
     clear_terminal()
     puts "Spinplay v1.3 help menu\n
-Spinplay is a front-end for FFplay which adds a file browser and automates a lot of the boring stuff you need to type to use FFplay as a proper media player
+Spinplay is a media player that uses FFplay for media playback. It's a TUI application with a file browser, commands and configuration.
 
-Common controls during video/audio playback:
+Common controls during playback:
     - Space or P: pause
     - Esc or Q: end playback
     - S: advance 1 frame
