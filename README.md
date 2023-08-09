@@ -1,14 +1,13 @@
 # Spinplay
-Spinplay is a Ruby (previously Bash) front-end that uses FFplay for more extensive and convenient media playback from the CLI.
+Spinplay is a lightweight media player that uses FFplay in the backend for playing images, video and audio.
 
-Spinplay has a built-in TUI file explorer for navigating your directories and files through the terminal. You can also launch multiple instances of FFplay, or use the file browser while FFplay is running.
+Spinplay has a built-in TUI file explorer for navigating your directories and files through the terminal, as well commands and a configuration file to give you more power. You can also launch multiple instances of FFplay, or use the file browser while FFplay is running.
 
-### Note
 
-Spinplay was until just now a Bash front-end. I am now rewriting it in Ruby with more capabilities, speed and cross-platform in mind.
+Spinplay was until just now a Bash script, and only recently I replaced it with the new Ruby rewrite.
 
 # Download
-Spinplay should work in multiple operative systems, but it's currently only officially tested for Linux systems and Windows
+Spinplay is officially tested on Linux and Windows, but it's designed to be highly portable and so it should work on many more operating systems
 
 Download Spinplay [here](https://github.com/spacebanana420/Spinplay/releases/). You also need to install Ruby and FFmpeg
 
