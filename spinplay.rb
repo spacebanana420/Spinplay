@@ -4,9 +4,9 @@ require "./lib/readconfig.rb"
 
 $startingdir = Dir.pwd()
 if "ABCDEFGHIJKLMNOPQRSTUVWXYZ".include?($startingdir.chars[0]) == true && $startingdir.chars[1] == ":"
-    $platform = 1
+    $platform = 1 #windoos
 else
-    $platform = 0
+    $platform = 0 #not windoos
 end
 
 $volume = "-volume 12"; $safecheck = true; $fullscreen = false; $pathsperline = 3; $linesperblock = 10; $linespacing = "     "
@@ -61,12 +61,14 @@ def print_dirs()
     allpaths = Array.new(); allpaths_num = Array.new()
 
     paths.each do |path|
-        if File::file?(path) == true
-            if check_if_supported(path) == true
-                files.push(path)
+        if path.chars[0] != "."
+            if File::file?(path) == true
+                if check_if_supported(path) == true
+                    files.push(path)
+                end
+            else
+                dirs.push(path)
             end
-        else
-            dirs.push(path)
         end
     end
     count=2
@@ -100,12 +102,14 @@ def find_path(searchedname)
     dirs = Array.new(); files = Array.new()
 
     paths.each do |path|
-        if File::file?(path) == true
-            if check_if_supported(path) == true
-                files.push(path)
+        if path.chars[0] != "."
+            if File::file?(path) == true
+                if check_if_supported(path) == true
+                    files.push(path)
+                end
+            else
+                dirs.push(path)
             end
-        else
-            dirs.push(path)
         end
     end
     count=2
