@@ -66,12 +66,19 @@ Common controls during video/audio playback:
 
 List of commands:
     - help
-    - search [name_to_find]
+        Shows this menu
+    - search [name]
+        Searches for all files and directories that contain [name] in their name
     - volume
+        Changes volume
     - mute
+        Mutes
     - config
+        Shows your current config as written in config.txt
 
-File detection is done through their extensions and it's case-sensitive, so the media files without or with a different extension than the one for their format will not be detected
+File detection is done through their file extensions and it's case-sensitive, so the media files without or with a different extension than the one for their format will not be detected
+
+Files whose name starts with \".\" are hidden files and will be ignored by Spinplay
 
 File Extensions:
     Video
