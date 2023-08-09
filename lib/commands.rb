@@ -50,7 +50,7 @@ end
 
 def printhelp()
     clear_terminal()
-    puts "Spinplay v1.1 help menu\n
+    puts "Spinplay v1.3 help menu\n
 Spinplay is a front-end for FFplay which adds a file browser and automates a lot of the boring stuff you need to type to use FFplay as a proper media player
 
 Common controls during video/audio playback:
