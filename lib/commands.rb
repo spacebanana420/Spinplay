@@ -91,6 +91,8 @@ File Extensions:
     Image
         png
         jpg
+        jpeg
+        JPG
         bmp
         tiff
         tif

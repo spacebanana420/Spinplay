@@ -47,22 +47,22 @@ def filebrowser()
 end
 
 def open_path(path)
-    if File::file?(path) == true
+    if File.file?(path) == true
         playmedia(path)
     else
-        Dir::chdir(path)
+        Dir.chdir(path)
     end
 end
 
 def print_dirs()
     finalstring = "0: Exit#{$linespacing}1: Go back\n\n---Directories---\n"
-    paths = Dir::children(".")
+    paths = Dir.children(".")
     dirs = Array.new(); files = Array.new()
     allpaths = Array.new(); allpaths_num = Array.new()
 
     paths.each do |path|
         if path.chars[0] != "."
-            if File::file?(path) == true
+            if File.file?(path) == true
                 if check_if_supported(path) == true
                     files.push(path)
                 end
@@ -98,7 +98,7 @@ end
 def find_path(searchedname)
     clear_terminal()
     finalstring = "Found the following paths that contain #{searchedname}:\n\n---Directories---\n"
-    paths = Dir::children(".")
+    paths = Dir.children(".")
     dirs = Array.new(); files = Array.new()
 
     paths.each do |path|
