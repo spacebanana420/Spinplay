@@ -55,7 +55,7 @@ def open_path(path)
 end
 
 def print_dirs()
-    finalstring = "0: Exit#{$linespacing}1: Go back\n\n---Directories---\n"
+    finalstring = "#{Dir.pwd()}\n\n0: Exit#{$linespacing}1: Go back\n\n---Directories---\n"
     paths = Dir.children(".")
     dirs = Array.new(); files = Array.new()
     allpaths = Array.new(); allpaths_num = Array.new()

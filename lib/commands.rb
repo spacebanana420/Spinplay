@@ -16,9 +16,18 @@ def read_command(answer)
         if answer.include?("search ") == true
             find_path(answer.sub("search ", ""))
             return true
+        elsif answer.include?("goto ") == true
+            return gotoDir(answer.sub("goto ", ""))
         end
     end
     return false
+end
+
+def gotoDir(path)
+    if path == "" || Dir.exist?(path) == false
+        return false
+    end
+    Dir.chdir(path)
 end
 
 
@@ -69,6 +78,8 @@ List of commands:
         Shows this menu
     - search [name]
         Searches for all files and directories that contain [name] in their name
+    - goto [path]
+        Goes to the path you specify if it exists
     - volume
         Changes volume
     - mute
