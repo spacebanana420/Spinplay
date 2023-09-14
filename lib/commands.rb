@@ -4,7 +4,7 @@ def read_command(answer)
         printhelp()
         return true
     when "volume"
-        choose_volume(false)
+        choose_volume()
         return true
     when "mute"
         $mute = !$mute
@@ -12,6 +12,10 @@ def read_command(answer)
     when "config"
         printconfig()
         return true
+    when "search"
+        find_path(getSecondArg("Type the name to search for"))
+    when "goto"
+        gotoDir(getSecondArg("Type the path to go to"))
     else
         if answer.include?("search ") == true
             find_path(answer.sub("search ", ""))
@@ -21,6 +25,12 @@ def read_command(answer)
         end
     end
     return false
+end
+
+def getSecondArg(message)
+    puts message
+    arg = gets.chomp
+    return arg
 end
 
 def gotoDir(path)
@@ -59,7 +69,7 @@ end
 
 def printhelp()
     clear_terminal()
-    puts "Spinplay v1.2.2 help menu\n
+    puts "Spinplay v1.2.3 help menu\n
 Spinplay is a media player that uses FFplay for media playback. It's a TUI application with a file browser, commands and configuration.
 
 Common controls during playback:
