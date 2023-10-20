@@ -135,6 +135,9 @@ def find_path(searchedname)
 end
 
 def checkifnumber(text)
+    if text == ""
+        return false
+    end
     text.chars().each do |char|
         if "0123456789".include?(char) == false
             return false

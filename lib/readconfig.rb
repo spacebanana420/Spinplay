@@ -30,7 +30,11 @@ def readconfig()
             when "pathsperline"
                 paths_line = getvaluefromoption(line)
                 if checkifnumber(paths_line) == true
-                    $pathsperline = paths_line.to_i
+                    if paths_line == "0"
+                        $pathsperline = 1
+                    else
+                        $pathsperline = paths_line.to_i
+                    end
                 end
             when "linesperblock"
                 blocksize = getvaluefromoption(line)
