@@ -1,24 +1,16 @@
 require "./lib/commands.rb"
 require "./lib/ffsettings.rb"
 require "./lib/readconfig.rb"
+require "./lib/tui.rb"
 
 $startingdir = Dir.pwd()
-if "ABCDEFGHIJKLMNOPQRSTUVWXYZ".include?($startingdir.chars[0]) == true && $startingdir.chars[1] == ":"
-    $platform = 1 #windoos
-else
-    $platform = 0 #not windoos
-end
+# if "ABCDEFGHIJKLMNOPQRSTUVWXYZ".include?($startingdir.chars[0]) == true && $startingdir.chars[1] == ":"
+#     $platform = 1 #windoos
+# else
+#     $platform = 0 #not windoos
+# end
 
 $volume = "-volume 12"; $safecheck = true; $fullscreen = false; $pathsperline = 3; $linesperblock = 10; $linespacing = "     "
-
-
-def clear_terminal()
-    if $platform == 0
-        system("clear")
-    else
-        system("cls")
-    end
-end
 
 def filebrowser()
     while true
@@ -55,7 +47,11 @@ def open_path(path)
 end
 
 def print_dirs()
-    finalstring = "#{Dir.pwd()}\n\n0: Exit#{$linespacing}1: Go back\n\n---Directories---\n"
+    green = foreground("green")
+    default = foreground("default")
+    yellow = foreground("yellow")
+
+    finalstring = "#{Dir.pwd()}\n\n#{yellow}0:#{default} Exit#{$linespacing}#{green}1:#{default} Go back\n\n#{yellow}---Directories---#{default}\n"
     paths = Dir.children(".")
     dirs = Array.new(); files = Array.new()
     allpaths = Array.new(); allpaths_num = Array.new()
@@ -75,16 +71,16 @@ def print_dirs()
     pathsprinted=0
     dirs.each do |dir|
         if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
-        finalstring += "#{count}: #{dir}#{$linespacing}"
+        finalstring += "#{green}#{count}:#{default} #{dir}#{$linespacing}"
 
         allpaths.push(dir); allpaths_num.push(count)
         count+=1; pathsprinted+=1
     end
     pathsprintedi=0
-    finalstring += "\n---Files---\n"
+    finalstring += "\n#{yellow}---Files---#{default}\n"
     files.each do |file|
         if pathsprinted == $pathsperline then pathsprinted = 0; finalstring += "\n" end
-        finalstring += "#{count}: #{file}#{$linespacing}"
+        finalstring += "#{green}#{count}:#{default} #{file}#{$linespacing}"
 
         allpaths.push(file); allpaths_num.push(count)
         count+=1; pathsprinted+=1

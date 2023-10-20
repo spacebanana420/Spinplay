@@ -69,7 +69,7 @@ end
 
 def printhelp()
     clear_terminal()
-    puts "Spinplay v1.2.3 help menu\n
+    puts "Spinplay v1.2.4 help menu\n
 Spinplay is a media player that uses FFplay for media playback. It's a TUI application with a file browser, commands and configuration.
 
 Common controls during playback:
